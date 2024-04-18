@@ -1,3 +1,9 @@
+using System;
+using System.Windows.Forms;
+using System.Drawing;
+using System.IO;
+using System.Diagnostics;
+
 namespace TaskTracker
 {
     public partial class Form1 : Form
@@ -8,7 +14,7 @@ namespace TaskTracker
             InitializeComponent();
         }
 
-        public void colorChange1(object sender, EventArgs e)
+        public void hover1(object sender, EventArgs e)
         {
             label2.ForeColor = Color.Blue;
         }
@@ -18,7 +24,7 @@ namespace TaskTracker
             label2.ForeColor = Color.Black;
         }
 
-        public void colorChange2(object sender, EventArgs e)
+        public void hover2(object sender, EventArgs e)
         {
             label3.ForeColor = Color.Blue;
         }
@@ -30,10 +36,10 @@ namespace TaskTracker
 
         private void label2_Click(object sender, EventArgs e)
         {
-            target = "accedi.html?target=0";
+            target = "C:\\Users\\erdod\\OneDrive\\Desktop\\TaskTracker\\TaskTracker\\logIn.html";
             try
             {
-                System.Diagnostics.Process.Start(target);
+                Process.Start(target);
             }
             catch (System.ComponentModel.Win32Exception noBrowser)
             {
@@ -48,10 +54,10 @@ namespace TaskTracker
 
         private void label3_Click(object sender, EventArgs e)
         {
-            target = "registra.html?target=1";
+            target = "C:\\Users\\erdod\\OneDrive\\Desktop\\TaskTracker\\TaskTracker\\logIn.html";
             try
             {
-                System.Diagnostics.Process.Start(target);
+                Process.Start(target);
             }
             catch (System.ComponentModel.Win32Exception noBrowser)
             {

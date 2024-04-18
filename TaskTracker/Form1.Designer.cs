@@ -55,7 +55,7 @@
             this.label2.Text = "Accedi";
             this.label2.Click += new System.EventHandler(this.label2_Click);
             this.label2.MouseLeave += new System.EventHandler(this.deHover1);
-            this.label2.MouseHover += new System.EventHandler(this.colorChange1);
+            this.label2.MouseHover += new System.EventHandler(this.hover1);
             // 
             // label3
             // 
@@ -69,7 +69,7 @@
             this.label3.Text = "Registrati";
             this.label3.Click += new System.EventHandler(this.label3_Click);
             this.label3.MouseLeave += new System.EventHandler(this.deHover2);
-            this.label3.MouseHover += new System.EventHandler(this.colorChange2);
+            this.label3.MouseHover += new System.EventHandler(this.hover2);
             // 
             // Form1
             // 
