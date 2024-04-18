@@ -37,36 +37,50 @@ namespace TaskTracker
         private void label2_Click(object sender, EventArgs e)
         {
             target = "C:\\Users\\erdod\\OneDrive\\Desktop\\TaskTracker\\TaskTracker\\logIn.html";
+            target = Path.Combine(Application.StartupPath, target);
             try
             {
-                Process.Start(target);
+                // Creare un nuovo form
+                Form htmlForm = new Form();
+                htmlForm.Text = "Log In";
+
+                // Creare un controllo WebBrowser e impostarlo come contenuto del form
+                WebBrowser webBrowser = new WebBrowser();
+                webBrowser.Dock = DockStyle.Fill;
+                webBrowser.Navigate(target);
+                htmlForm.Controls.Add(webBrowser);
+
+                // Visualizzare il form
+                htmlForm.ShowDialog();
             }
-            catch (System.ComponentModel.Win32Exception noBrowser)
+            catch (Exception ex)
             {
-                if (noBrowser.ErrorCode == -2147467259)
-                    MessageBox.Show(noBrowser.Message);
-            }
-            catch (System.Exception other)
-            {
-                MessageBox.Show(other.Message);
+                MessageBox.Show("Errore durante l'apertura del file HTML: " + ex.Message);
             }
         }
 
         private void label3_Click(object sender, EventArgs e)
         {
             target = "C:\\Users\\erdod\\OneDrive\\Desktop\\TaskTracker\\TaskTracker\\logIn.html";
+            target = Path.Combine(Application.StartupPath, target);
             try
             {
-                Process.Start(target);
+                // Creare un nuovo form
+                Form htmlForm = new Form();
+                htmlForm.Text = "Register";
+
+                // Creare un controllo WebBrowser e impostarlo come contenuto del form
+                WebBrowser webBrowser = new WebBrowser();
+                webBrowser.Dock = DockStyle.Fill;
+                webBrowser.Navigate(target);
+                htmlForm.Controls.Add(webBrowser);
+
+                // Visualizzare il form
+                htmlForm.ShowDialog();
             }
-            catch (System.ComponentModel.Win32Exception noBrowser)
+            catch (Exception ex)
             {
-                if (noBrowser.ErrorCode == -2147467259)
-                    MessageBox.Show(noBrowser.Message);
-            }
-            catch (System.Exception other)
-            {
-                MessageBox.Show(other.Message);
+                MessageBox.Show("Errore durante l'apertura del file HTML: " + ex.Message);
             }
         }
     }
