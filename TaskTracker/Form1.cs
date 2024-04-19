@@ -3,15 +3,19 @@ using System.Windows.Forms;
 using System.Drawing;
 using System.IO;
 using System.Diagnostics;
+using MySql.Data.MySqlClient;
+using System.Collections.Generic;
 
 namespace TaskTracker
 {
     public partial class Form1 : Form
     {
-        string target;
+        MySQL s;
+
         public Form1()
         {
             InitializeComponent();
+            s = new MySQL();
         }
 
         public void hover1(object sender, EventArgs e)
@@ -36,52 +40,20 @@ namespace TaskTracker
 
         private void label2_Click(object sender, EventArgs e)
         {
-            target = "C:\\Users\\erdod\\OneDrive\\Desktop\\TaskTracker\\TaskTracker\\logIn.html";
-            target = Path.Combine(Application.StartupPath, target);
-            try
-            {
-                // Creare un nuovo form
-                Form htmlForm = new Form();
-                htmlForm.Text = "Log In";
 
-                // Creare un controllo WebBrowser e impostarlo come contenuto del form
-                WebBrowser webBrowser = new WebBrowser();
-                webBrowser.Dock = DockStyle.Fill;
-                webBrowser.Navigate(target);
-                htmlForm.Controls.Add(webBrowser);
-
-                // Visualizzare il form
-                htmlForm.ShowDialog();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Errore durante l'apertura del file HTML: " + ex.Message);
-            }
+            s.passData();
         }
 
         private void label3_Click(object sender, EventArgs e)
         {
-            target = "C:\\Users\\erdod\\OneDrive\\Desktop\\TaskTracker\\TaskTracker\\logIn.html";
-            target = Path.Combine(Application.StartupPath, target);
-            try
-            {
-                // Creare un nuovo form
-                Form htmlForm = new Form();
-                htmlForm.Text = "Register";
+            
+        }
 
-                // Creare un controllo WebBrowser e impostarlo come contenuto del form
-                WebBrowser webBrowser = new WebBrowser();
-                webBrowser.Dock = DockStyle.Fill;
-                webBrowser.Navigate(target);
-                htmlForm.Controls.Add(webBrowser);
-
-                // Visualizzare il form
-                htmlForm.ShowDialog();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Errore durante l'apertura del file HTML: " + ex.Message);
-            }
+        public class JsonData
+        {
+            public string String1 { get; set; }
+            public string String2 { get; set; }
+            public DateTime Data { get; set; }
         }
     }
 }
