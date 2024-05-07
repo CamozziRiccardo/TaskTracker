@@ -49,7 +49,7 @@ namespace TaskTracker
         }
 
         #region accesso/registrazione
-        /*public void hover1(object sender, EventArgs e)
+        public void hover1(object sender, EventArgs e)
         {
             label2.ForeColor = Color.Blue;
         }
@@ -58,8 +58,6 @@ namespace TaskTracker
         {
             label2.ForeColor = Color.Black;
         }
-        */
-        
 
         public void hover2(object sender, EventArgs e)
         {
@@ -112,7 +110,8 @@ namespace TaskTracker
                 if (json.assesPosition(filePath, userSample.name) == -1) MessageBox.Show("Posizione dell'utente non valida, si prega di rifare la registrazione e creare un nuovo utente");
                 else 
                 { 
-                    Form3 form2 = new Form3(json.assesPosition(filePath, userSample.name));
+                    Form3 f3 = new Form3(json.assesPosition(filePath, userSample.name));
+                    f3.Show();
                 }
             }
             else if (ar && !json.verifyUser(userSample.name, userSample.password, userSample.azienda.nomeAzienda, filePath))

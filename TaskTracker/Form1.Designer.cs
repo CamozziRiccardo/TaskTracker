@@ -54,8 +54,8 @@
             label2.TabIndex = 3;
             label2.Text = "Accedi";
             label2.Click += label2_Click;
-            //label2.MouseLeave += deHover1;
-            //abel2.MouseHover += hover1;
+            label2.MouseLeave += deHover1;
+            label2.MouseHover += hover1;
             // 
             // label3
             // 
