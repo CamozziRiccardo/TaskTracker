@@ -7,32 +7,28 @@ using System.Threading.Tasks;
 
 namespace TaskTracker
 {
-    internal class jsonManager
+    internal class arManager
     {
         public bool createUser(string username, string password, Azienda az, string filepath)
         {
             try
             {
-                //prendi tutti gli utenti dal file json
                 Dictionary<string, userData> users = loadUsers(filepath);
                 if (users.ContainsKey(username))
                 {
                     return false;
                 }
 
-                //creazione del nuovo utente da inserire nel json
                 userData nuovoUtente = new userData
                 {
                     name = username,
                     password = password,
                     azienda = az,
-                    task = new task()
+                    tasks = new List<task>()
                 };
 
-                //aggiungo il nuovo utente al dizionario
                 users.Add(username, nuovoUtente);
 
-                //salvo i dati sul json
                 saveUser(filepath, users);
 
                 return true;
@@ -43,25 +39,16 @@ namespace TaskTracker
             }
         }
 
-        public bool verifyUser(string username, string password, string filepath)
+        public bool verifyUser(string username, string password, string azienda, string filepath)
         {
-            try
-            {
-                //prendi tutti gli utenti dal file json
-                Dictionary<string, userData> users = loadUsers(filepath);
+            Dictionary<string, userData> users = loadUsers(filepath);
 
-                //controllo se l'utente esiste già e se la password è corretta per l'accesso
-                if (users.ContainsKey(username) && users[username].password == password)
-                {
-                    return true;
-                }
-
-                return false;
-            }
-            catch
+            if (users.ContainsKey(username) && users[username].password == password && users[username].azienda.nomeAzienda == azienda)
             {
-                return false;
+                return true;
             }
+
+            return false;
         }
 
         public Dictionary<string, userData> loadUsers(string filePath)
@@ -78,6 +65,31 @@ namespace TaskTracker
         {
             var json = JsonConvert.SerializeObject(users, Formatting.Indented);
             File.WriteAllText(filePath, json);
+        }
+
+        public int assesPosition(string filePath, string username)
+        {
+            var json = File.ReadAllText(filePath);
+            Dictionary<string, userData> users = JsonConvert.DeserializeObject<Dictionary<string, userData>>(json);
+            foreach (var user in users)
+            {
+                if (user.Key == username)
+                {
+                    if (user.Value.azienda.posizione == "Dipendente")
+                    {
+                        return 1;
+                    }
+                    else if (user.Value.azienda.posizione == "Capo Reparto")
+                    {
+                        return 2;
+                    }
+                    else if (user.Value.azienda.posizione == "Dirigente")
+                    {
+                        return 3;
+                    }
+                }
+            }
+            return -1;
         }
     }
 }

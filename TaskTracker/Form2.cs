@@ -58,15 +58,28 @@ namespace TaskTracker
 
         private void button2_Click(object sender, EventArgs e)
         {
-            user.name = textBox1.Text;
-            user.password = textBox2.Text;
-            user.azienda.nomeAzienda = textBox3.Text;
-            user.azienda.posizione = comboBox1.Text;
-            OnDatiInviati(user);
-            textBox1.Text = "";
-            textBox2.Text = "";
-            textBox3.Text = "";
-            comboBox1.Text = "";
+            if (ar)
+            {
+                user.name = textBox1.Text;
+                user.password = textBox2.Text;
+                user.azienda.nomeAzienda = comboBox2.Text;
+                OnDatiInviati(user);
+                textBox1.Text = "";
+                textBox2.Text = "";
+                comboBox2.Text = "";
+            }
+            else
+            {
+                user.name = textBox1.Text;
+                user.password = textBox2.Text;
+                user.azienda.nomeAzienda = textBox3.Text;
+                user.azienda.posizione = comboBox1.Text;
+                OnDatiInviati(user);
+                textBox1.Text = "";
+                textBox2.Text = "";
+                textBox3.Text = "";
+                comboBox1.Text = "";
+            }
         }
 
         protected virtual void OnDatiInviati(userData data)

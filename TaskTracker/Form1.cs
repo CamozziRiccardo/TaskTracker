@@ -25,8 +25,9 @@ namespace TaskTracker
     {
         public string name;
         public string password;
+        public bool completion;
         public Azienda azienda;
-        public task task;
+        public List<task> tasks;
     }
     #endregion
 
@@ -34,7 +35,7 @@ namespace TaskTracker
     {
         public userData userSample;
         Form2 f2;
-        jsonManager json;
+        arManager json;
         bool ar;
         string filePath;
 
@@ -43,12 +44,12 @@ namespace TaskTracker
             InitializeComponent();
             userSample = new userData();
             f2 = new Form2();
-            json = new jsonManager();
+            json = new arManager();
             filePath = "task.json";
         }
 
         #region accesso/registrazione
-        public void hover1(object sender, EventArgs e)
+        /*public void hover1(object sender, EventArgs e)
         {
             label2.ForeColor = Color.Blue;
         }
@@ -57,6 +58,7 @@ namespace TaskTracker
         {
             label2.ForeColor = Color.Black;
         }
+        */
         
 
         public void hover2(object sender, EventArgs e)
@@ -95,7 +97,7 @@ namespace TaskTracker
             userSample = e.user;
             if (!ar && json.createUser(userSample.name, userSample.password, userSample.azienda, filePath))
             {
-                MessageBox.Show("Utente creato con successo");
+                MessageBox.Show("Utente creato con successo, ora esegui l'accesso");
                 f2.Hide();
             }
             else if (!ar && !json.createUser(userSample.name, userSample.password, userSample.azienda, filePath))
@@ -103,14 +105,19 @@ namespace TaskTracker
                 MessageBox.Show("Utente già esistente, esegui l'accesso invece della registrazione");
                 f2.Hide();
             }
-            else if (ar && json.verifyUser(userSample.name, userSample.password, filePath))
+            else if (ar && json.verifyUser(userSample.name, userSample.password, userSample.azienda.nomeAzienda, filePath))
             {
                 MessageBox.Show("Accesso eseguito con successo");
                 f2.Hide();
+                if (json.assesPosition(filePath, userSample.name) == -1) MessageBox.Show("Posizione dell'utente non valida, si prega di rifare la registrazione e creare un nuovo utente");
+                else 
+                { 
+                    Form3 form2 = new Form3(json.assesPosition(filePath, userSample.name));
+                }
             }
-            else if (ar && !json.verifyUser(userSample.name, userSample.password, filePath))
+            else if (ar && !json.verifyUser(userSample.name, userSample.password, userSample.azienda.nomeAzienda, filePath))
             {
-                MessageBox.Show("Password o utente errati");
+                MessageBox.Show("Azienda, password o utente errati");
             }
         }
         #endregion
