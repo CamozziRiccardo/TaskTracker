@@ -3,41 +3,48 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.IO;
-using System.Text.Json;
+using Newtonsoft.Json;
 using System.Net;
 using System.Threading.Tasks;
 
 namespace TaskTracker
 {
     #region strutture
-    public struct JsonData
+    public struct task
     {
         public string nomeTask;
         public string argomentoTask;
         public DateTime dataScadenza;
     }
-
+    public struct Azienda
+    {
+        public string nomeAzienda;
+        public string posizione;
+    }
     public struct userData
     {
-        public int id;
         public string name;
         public string password;
+        public Azienda azienda;
+        public task task;
     }
     #endregion
 
     public partial class Form1 : Form
     {
-        DatabaseManager s;
         public userData userSample;
         Form2 f2;
+        jsonManager json;
         bool ar;
+        string filePath;
 
         public Form1()
         {
             InitializeComponent();
             userSample = new userData();
-            s = new DatabaseManager("localhost:21", "interfacciatmdb", "0rcoDdinci!", "my_interfacciatmdb");
             f2 = new Form2();
+            json = new jsonManager();
+            filePath = "task.json";
         }
 
         #region accesso/registrazione
@@ -50,6 +57,7 @@ namespace TaskTracker
         {
             label2.ForeColor = Color.Black;
         }
+        
 
         public void hover2(object sender, EventArgs e)
         {
@@ -64,6 +72,7 @@ namespace TaskTracker
         private void label2_Click(object sender, EventArgs e)
         {
             f2.ar = true;
+            f2.inizialization();
             f2.datiInviati += form2_datiInviati;
             ar = true;
             f2.Show();
@@ -72,31 +81,38 @@ namespace TaskTracker
         private void label3_Click(object sender, EventArgs e)
         {
             f2.ar = false;
+            f2.inizialization();
             f2.datiInviati += form2_datiInviati;
             ar = false;
             f2.Show();
         }
-
-        #region comunicazione con database
-        private void form2_datiInviati(object sender, invioDati e)
-        {
-            userSample = e.user;
-            if (ar && s.CreaUtente(userSample.name, userSample.password, "{\"test\": \"test\"}"))
-            {
-                MessageBox.Show("Utente creato con successo");
-            }
-            else if (s.VerificaEsistenzaUtente(1, userSample.password))
-            {
-                MessageBox.Show("Utente verificato con successo");
-            }
-            else
-            {
-                MessageBox.Show("Utente non valido, reinserire i dati");
-            }
-            f2.Hide();
-        }
         #endregion
 
+        #region salvataggio dati
+        //Controllo dell'utente
+        private void form2_datiInviati(object sender, invioDati e) 
+        {
+            userSample = e.user;
+            if (!ar && json.createUser(userSample.name, userSample.password, userSample.azienda, filePath))
+            {
+                MessageBox.Show("Utente creato con successo");
+                f2.Hide();
+            }
+            else if (!ar && !json.createUser(userSample.name, userSample.password, userSample.azienda, filePath))
+            {
+                MessageBox.Show("Utente già esistente, esegui l'accesso invece della registrazione");
+                f2.Hide();
+            }
+            else if (ar && json.verifyUser(userSample.name, userSample.password, filePath))
+            {
+                MessageBox.Show("Accesso eseguito con successo");
+                f2.Hide();
+            }
+            else if (ar && !json.verifyUser(userSample.name, userSample.password, filePath))
+            {
+                MessageBox.Show("Password o utente errati");
+            }
+        }
         #endregion
     }
 }

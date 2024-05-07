@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace TaskTracker
 {
-    internal class Task
+    internal class taskManager
     {
+
     }
 }
