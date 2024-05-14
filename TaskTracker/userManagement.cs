@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TaskTracker
 {
-    internal class arManager
+    internal class userManagement
     {
         public bool createUser(string username, string password, Azienda az, string filepath)
         {
@@ -90,6 +90,20 @@ namespace TaskTracker
                 }
             }
             return -1;
+        }
+
+        public userData getUserData(string filePath, string username) 
+        {
+            var json = File.ReadAllText(filePath);
+            Dictionary<string, userData> users = JsonConvert.DeserializeObject<Dictionary<string, userData>>(json);
+            foreach (var user in users)
+            {
+                if (user.Value.name == username)
+                {
+                    return user.Value;
+                }
+            }
+            return new userData();
         }
     }
 }

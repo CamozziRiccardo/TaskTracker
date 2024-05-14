@@ -12,16 +12,23 @@ namespace TaskTracker
 {
     public partial class Form3 : Form
     {
-        int pos;
-        public Form3(int posizione)
+        userData user;
+        userManagement uM;
+        taskManager tM;
+        string filepath;
+        public Form3(int posizione, string username)
         {
             InitializeComponent();
-            pos = posizione;
+            filepath = "task.json";
+            tM = new taskManager();
+            uM = new userManagement();
+            user = uM.getUserData(filepath, username);
         }
 
         private void Form3_Load(object sender, EventArgs e)
         {
-
+            label2.Text = user.azienda.posizione + " dell'azienda " + user.azienda.nomeAzienda;
+            label3.Text = "user: " + user.name;
         }
     }
 }

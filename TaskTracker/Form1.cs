@@ -14,6 +14,7 @@ namespace TaskTracker
     {
         public string nomeTask;
         public string argomentoTask;
+        public bool completion;
         public DateTime dataScadenza;
     }
     public struct Azienda
@@ -25,7 +26,6 @@ namespace TaskTracker
     {
         public string name;
         public string password;
-        public bool completion;
         public Azienda azienda;
         public List<task> tasks;
     }
@@ -34,8 +34,7 @@ namespace TaskTracker
     public partial class Form1 : Form
     {
         public userData userSample;
-        Form2 f2;
-        arManager json;
+        userManagement json;
         bool ar;
         string filePath;
 
@@ -43,8 +42,8 @@ namespace TaskTracker
         {
             InitializeComponent();
             userSample = new userData();
-            f2 = new Form2();
-            json = new arManager();
+
+            json = new userManagement();
             filePath = "task.json";
         }
 
@@ -71,6 +70,7 @@ namespace TaskTracker
 
         private void label2_Click(object sender, EventArgs e)
         {
+            Form2 f2 = new Form2();
             f2.ar = true;
             f2.inizialization();
             f2.datiInviati += form2_datiInviati;
@@ -80,6 +80,7 @@ namespace TaskTracker
 
         private void label3_Click(object sender, EventArgs e)
         {
+            Form2 f2 = new Form2();
             f2.ar = false;
             f2.inizialization();
             f2.datiInviati += form2_datiInviati;
@@ -96,21 +97,18 @@ namespace TaskTracker
             if (!ar && json.createUser(userSample.name, userSample.password, userSample.azienda, filePath))
             {
                 MessageBox.Show("Utente creato con successo, ora esegui l'accesso");
-                f2.Hide();
             }
             else if (!ar && !json.createUser(userSample.name, userSample.password, userSample.azienda, filePath))
             {
                 MessageBox.Show("Utente già esistente, esegui l'accesso invece della registrazione");
-                f2.Hide();
             }
             else if (ar && json.verifyUser(userSample.name, userSample.password, userSample.azienda.nomeAzienda, filePath))
             {
                 MessageBox.Show("Accesso eseguito con successo");
-                f2.Hide();
                 if (json.assesPosition(filePath, userSample.name) == -1) MessageBox.Show("Posizione dell'utente non valida, si prega di rifare la registrazione e creare un nuovo utente");
                 else 
                 { 
-                    Form3 f3 = new Form3(json.assesPosition(filePath, userSample.name));
+                    Form3 f3 = new Form3(json.assesPosition(filePath, userSample.name), userSample.name);
                     f3.Show();
                 }
             }
