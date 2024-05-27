@@ -9,6 +9,16 @@ namespace TaskTracker
 {
     internal class taskManager
     {
+        public void loadTasks(string filepath, userData user, ListView lV)
+        {
+            lV.Items.Clear();
+            foreach (task t in user.tasks)
+            lV.Items.Add(t.nomeTask);
+        }
 
+        public void addTask(string filepath, task newTask,)
+        {
+
+        }
     }
 }

@@ -35,11 +35,11 @@ namespace TaskTracker
             {
                 label4.Hide();
                 label5.Hide();
-                textBox3.Hide();
+                comboBox3.Hide();
                 comboBox1.Hide();
                 label6.Show();
                 comboBox2.Show();
-                chargeCombobBox();
+                chargeCombobBox(2);
                 label1.Text = "Esegui l'accesso";
                 button2.Text = "Accedi";
             }
@@ -49,8 +49,9 @@ namespace TaskTracker
                 button2.Text = "Registrati";
                 label4.Show();
                 label5.Show();
-                textBox3.Show();
+                comboBox3.Show();
                 comboBox1.Show();
+                chargeCombobBox(1);
                 label6.Hide();
                 comboBox2.Hide();
             }
@@ -72,12 +73,12 @@ namespace TaskTracker
             {
                 user.name = textBox1.Text;
                 user.password = textBox2.Text;
-                user.azienda.nomeAzienda = textBox3.Text;
+                user.azienda.nomeAzienda = comboBox3.Text;
                 user.azienda.posizione = comboBox1.Text;
                 OnDatiInviati(user);
                 textBox1.Text = "";
                 textBox2.Text = "";
-                textBox3.Text = "";
+                comboBox3.Text = "";
                 comboBox1.Text = "";
             }
         }
@@ -88,9 +89,18 @@ namespace TaskTracker
         }
         #endregion
 
-        public void chargeCombobBox()
+        public void chargeCombobBox(int n)
         {
-            comboBox2.Items.Clear();
+            switch (n)
+            {
+                case 1:
+                    comboBox3.Items.Clear();
+                    break;
+
+                case 2:
+                    comboBox2.Items.Clear();
+                    break;
+            }
             string json = File.ReadAllText("task.json");
 
             Dictionary<string, userData> users = JsonConvert.DeserializeObject<Dictionary<string, userData>>(json);
@@ -104,7 +114,16 @@ namespace TaskTracker
                     if (!uniqueCompanyNames.Contains(user.Value.azienda.nomeAzienda))
                     {
                         uniqueCompanyNames.Add(user.Value.azienda.nomeAzienda);
-                        comboBox2.Items.Add(user.Value.azienda.nomeAzienda);
+                        switch (n)
+                        {
+                            case 1:
+                                comboBox3.Items.Add(user.Value.azienda.nomeAzienda);
+                                break;
+
+                            case 2:
+                                comboBox2.Items.Add(user.Value.azienda.nomeAzienda);
+                                break;
+                        }
                     }
                 }
             }

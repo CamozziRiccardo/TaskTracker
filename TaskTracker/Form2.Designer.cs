@@ -34,12 +34,12 @@
             textBox1 = new TextBox();
             textBox2 = new TextBox();
             button2 = new Button();
-            textBox3 = new TextBox();
             label4 = new Label();
             comboBox1 = new ComboBox();
             label5 = new Label();
             label6 = new Label();
             comboBox2 = new ComboBox();
+            comboBox3 = new ComboBox();
             SuspendLayout();
             // 
             // label1
@@ -96,14 +96,6 @@
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
             // 
-            // textBox3
-            // 
-            textBox3.Location = new Point(12, 138);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(185, 27);
-            textBox3.TabIndex = 10;
-            textBox3.Visible = false;
-            // 
             // label4
             // 
             label4.AutoSize = true;
@@ -159,17 +151,26 @@
             comboBox2.TabIndex = 16;
             comboBox2.Visible = false;
             // 
+            // comboBox3
+            // 
+            comboBox3.FormattingEnabled = true;
+            comboBox3.Location = new Point(12, 137);
+            comboBox3.Name = "comboBox3";
+            comboBox3.Size = new Size(185, 28);
+            comboBox3.TabIndex = 17;
+            comboBox3.Visible = false;
+            // 
             // Form2
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(403, 215);
+            Controls.Add(comboBox3);
             Controls.Add(comboBox2);
             Controls.Add(label6);
             Controls.Add(label5);
             Controls.Add(comboBox1);
             Controls.Add(label4);
-            Controls.Add(textBox3);
             Controls.Add(button2);
             Controls.Add(textBox2);
             Controls.Add(textBox1);
@@ -191,11 +192,11 @@
         private TextBox textBox1;
         private TextBox textBox2;
         private Button button2;
-        private TextBox textBox3;
         private Label label4;
         private ComboBox comboBox1;
         private Label label5;
         private Label label6;
         private ComboBox comboBox2;
+        private ComboBox comboBox3;
     }
 }
