@@ -76,8 +76,7 @@ public class userData
     //funzione che mi ritorna i dati di un utente specifico
     public userData getUserData(string filepath, string username)
     {
-        var json = File.ReadAllText(filepath);
-        Dictionary<string, userData> users = JsonConvert.DeserializeObject<Dictionary<string, userData>>(json);
+        Dictionary<string, userData> users = loadUsers(filepath);
         foreach (var user in users)
         {
             if (user.Value.nome == username)
@@ -89,14 +88,14 @@ public class userData
     }
 
     //funzione che salav i dati degli utenti sul json
-    private void saveUser(string filepath, Dictionary<string, userData> users)
+    protected void saveUser(string filepath, Dictionary<string, userData> users)
     {
         var json = JsonConvert.SerializeObject(users, Formatting.Indented);
         File.WriteAllText(filepath, json);
     }
 
     //funzione che carica gli utenti presenti sul json in un dictionary
-    private Dictionary<string, userData> loadUsers(string filepath)
+    protected Dictionary<string, userData> loadUsers(string filepath)
     {
         var json = File.ReadAllText(filepath);
         if (string.IsNullOrEmpty(json))

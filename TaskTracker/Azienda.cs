@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public class azienda
+public class azienda : userData
 {
     public string nomeAzienda { get; set; }
     public string posizione { get; set; }
@@ -20,8 +20,7 @@ public class azienda
     public int assesPosition(string filepath, string username)
     {
         //caricamento degli utenti su un dictionary
-        var json = File.ReadAllText(filepath);
-        Dictionary<string, userData> data = JsonConvert.DeserializeObject<Dictionary<string,userData>>(json);
+        Dictionary<string, userData> data = loadUsers(filepath);
         foreach (var user in data)
         {
             if (user.Key == username)
