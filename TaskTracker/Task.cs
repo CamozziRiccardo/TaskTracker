@@ -35,12 +35,8 @@ public class task : userData
         Dictionary<string, userData> users = loadUsers(filepath);
 
         foreach (var user in users)
-        {
             if (user.Key == username)
-            {
                 user.Value.tasks.Add(newTask);
-            }
-        }
         saveUser(filepath, users);
     }
 
@@ -50,17 +46,26 @@ public class task : userData
         //caricamento degli utenti su un dictionary
         Dictionary<string, userData> users = loadUsers(filepath);
         foreach (var user in users)
-        {
             if (user.Key == username)
-            {
                 foreach (var task in user.Value.tasks)
-                {
                     if (task.completamento == true)
-                    {
-                        task.remov
-                    }
-                }
-            }
-        }
+                        user.Value.tasks.Remove(task);
+        saveUser(filepath, users);
+    }
+
+    //funzione di cancellamento di una una lista di task specifiche
+    public void removeTasks(string filepath, string username, List<task> toRemove)
+    {
+        //caricamento degli utenti su un dictionary
+        Dictionary<string, userData> users = loadUsers(filepath);
+
+        foreach (var user in users)
+            if (user.Key == username)
+                foreach (var task in user.Value.tasks)
+                    foreach (var taskToRemove in toRemove)
+                        if (task == taskToRemove)
+                            user.Value.tasks.Remove(task);
+        saveUser(filepath, users);
+
     }
 }

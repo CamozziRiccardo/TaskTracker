@@ -22,23 +22,13 @@ public class azienda : userData
         //caricamento degli utenti su un dictionary
         Dictionary<string, userData> data = loadUsers(filepath);
         foreach (var user in data)
-        {
             if (user.Key == username)
-            {
                 if (user.Value.az.posizione == "Dipendente")
-                {
                     return 1;
-                }
                 else if (user.Value.az.posizione == "Capo Reparto")
-                {
                     return 2;
-                }
                 else if (user.Value.az.posizione == "Dirigente")
-                {
                     return 3;
-                }
-            }
-        }
         //se l'utente non dovesse possedere una posizione o ne possedesse una non riconosciuta ritorno -1
         return -1;
     }

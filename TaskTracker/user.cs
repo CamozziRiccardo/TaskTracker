@@ -38,9 +38,7 @@ public class userData
 
             //verifico che l'utente non esista
             if (users.ContainsKey(username))
-            {
                 return false;
-            }
 
             //creo un nuovo oggetto userData dai parametri della funzione
             userData newUser = new userData(username, password, az, new List<task>());
@@ -66,9 +64,7 @@ public class userData
         Dictionary<string, userData> users = loadUsers(filepath);
 
         if (users.ContainsKey(username) && users[username].password == password && users[username].az.nomeAzienda == azienda)
-        {
             return true;
-        }
 
         return false;
     }
@@ -78,12 +74,8 @@ public class userData
     {
         Dictionary<string, userData> users = loadUsers(filepath);
         foreach (var user in users)
-        {
             if (user.Value.nome == username)
-            {
                 return user.Value;
-            }
-        }
         return new userData();
     }
 
@@ -99,9 +91,7 @@ public class userData
     {
         var json = File.ReadAllText(filepath);
         if (string.IsNullOrEmpty(json))
-        {
             return new Dictionary<string, userData>();
-        }
         return JsonConvert.DeserializeObject<Dictionary<string, userData>>(json);
     }
 }
