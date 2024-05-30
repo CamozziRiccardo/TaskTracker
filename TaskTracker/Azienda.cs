@@ -16,8 +16,10 @@ public class azienda
         posizione = "";
     }
 
+    //funzione di riconoscimento della posizione di un utente all'interno dell'azienda
     public int assesPosition(string filepath, string username)
     {
+        //caricamento degli utenti su un dictionary
         var json = File.ReadAllText(filepath);
         Dictionary<string, userData> data = JsonConvert.DeserializeObject<Dictionary<string,userData>>(json);
         foreach (var user in data)
@@ -38,6 +40,7 @@ public class azienda
                 }
             }
         }
+        //se l'utente non dovesse possedere una posizione o ne possedesse una non riconosciuta ritorno -1
         return -1;
     }
 }
