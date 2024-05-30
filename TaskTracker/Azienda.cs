@@ -32,4 +32,17 @@ public class azienda : userData
         //se l'utente non dovesse possedere una posizione o ne possedesse una non riconosciuta ritorno -1
         return -1;
     }
+
+    //funziona di caricamento degli utenti con posizioni meno importanti su una listview
+    public void loadEmplyees(string filepath, string username, ListView lV)
+    {
+        //caricamento degli utenti su un dictionary
+        Dictionary<string, userData> data = loadUsers(filepath);
+        foreach (var user in data)
+            if (user.Key == username)
+            {
+                if ()
+                return;
+            }  
+    }
 }

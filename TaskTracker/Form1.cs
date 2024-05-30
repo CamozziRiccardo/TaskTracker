@@ -9,42 +9,15 @@ using System.Threading.Tasks;
 /*
 namespace TaskTracker
 {
-    #region strutture
-    public struct task
-    {
-        public string nomeTask;
-        public string argomentoTask;
-        public bool completion;
-        public DateTime dataScadenza;
-    }
-    public struct Azienda
-    {
-        public string nomeAzienda;
-        public string posizione;
-    }
-    public struct userData
-    {
-        public string name;
-        public string password;
-        public Azienda azienda;
-        public List<task> tasks;
-    }
-    #endregion
-
     public partial class Form1 : Form
     {
         public userData userSample;
-        userManagement json;
-        bool ar;
         string filePath;
 
         public Form1()
         {
             InitializeComponent();
             userSample = new userData();
-
-            json = new userManagement();
-            filePath = "task.json";
         }
 
         #region accesso/registrazione
