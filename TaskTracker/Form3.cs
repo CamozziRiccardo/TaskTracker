@@ -14,41 +14,34 @@ namespace TaskTracker
     public partial class Form3 : Form
     {
         string filepath;
-        public Form3(int posizione)
+        userData activeUser;
+        public Form3(int posizione, userData activeUser)
         {
             InitializeComponent();
             filepath = "task.json";
+            this.activeUser = activeUser;
         }
 
         private void Form3_Load(object sender, EventArgs e)
         {
-            label2.Text = user.azienda.posizione + " dell'azienda " + user.azienda.nomeAzienda;
-            label3.Text = "user: " + user.name;
-            if (user.azienda.posizione == "Dipendente")
+            label2.Text = activeUser.az.posizione + " dell'azienda " + activeUser.az.nomeAzienda;
+            label3.Text = "user: " + activeUser.nome;
+            if (activeUser.az.posizione == "Dipendente")
             {
                 listView2.Hide();
                 label5.Hide();
                 button2.Hide();
             }
-            else if (user.azienda.posizione == "Capo reparto")
-            {
-                foreach (userData user1 in uM.loadUsers(filepath).Values)
-                {
-                    if (user1.azienda.posizione == "dipendente" && user.azienda.nomeAzienda == user1.azienda.nomeAzienda) listView2.Items.Add($"{user1.azienda.posizione}: {user1.name}");
-                }
-            }
             else
             {
-                foreach (userData user1 in uM.loadUsers(filepath).Values)
-                {
-                    if (user.azienda.nomeAzienda == user1.azienda.nomeAzienda) listView2.Items.Add($"{user1.azienda.posizione}: {user1.name}");
-                }
+                activeUser.az.loadEmplyees(filepath, activeUser.nome, listView1);
             }
         }
 
         private void listView2_DoubleClick(object sender, EventArgs e)
         {
-            if (listView2.SelectedIndices.Count > 0) tM.loadTasks(filepath, user, listView2);
+            if (listView2.SelectedIndices.Count > 0)
+                activeUser.loadTasks(filepath, activeUser, listView2);
             else
                 MessageBox.Show("No item selected");
         }

@@ -79,7 +79,7 @@ namespace TaskTracker
                 if (userSample.az.assesPosition(filePath, userSample.nome) == -1) MessageBox.Show("Posizione dell'utente non valida, si prega di rifare la registrazione e creare un nuovo utente");
                 else 
                 { 
-                    Form3 f3 = new Form3(userSample.az.assesPosition(filePath, userSample.nome), userSample.nome);
+                    Form3 f3 = new Form3(userSample.az.assesPosition(filePath, userSample.nome), userSample);
                     f3.Show();
                 }
             }
