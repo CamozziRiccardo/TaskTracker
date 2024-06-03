@@ -40,9 +40,18 @@ public class azienda : userData
         Dictionary<string, userData> data = loadUsers(filepath);
         foreach (var user in data)
             if (user.Key == username)
-            {
-                if ()
+                if (user.Key == "Capo Reparto")
+                { 
+                   foreach (var item in data)
+                        if (item.Value.az.nomeAzienda == user.Value.az.nomeAzienda && item.Value.az.posizione == "Dipendente")
+                            lV.Items.Add(item.Value.nome);
+                }
+                else if (user.Key == "Dirigente")
+                    foreach (var item in data)
+                        if (item.Value.az.nomeAzienda == user.Value.az.nomeAzienda && item.Value.az.posizione == "Dipendente")
+                            lV.Items.Add(item.Value.nome);
+                        else if (item.Value.az.nomeAzienda == user.Value.az.nomeAzienda && item.Value.az.posizione == "Capo Reparto")
+                            lV.Items.Add(item.Value.nome);
                 return;
-            }  
     }
 }

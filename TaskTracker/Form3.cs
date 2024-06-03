@@ -8,22 +8,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-/*
+
 namespace TaskTracker
 {
     public partial class Form3 : Form
     {
-        userData user;
-        userManagement uM;
-        taskManager tM;
         string filepath;
-        public Form3(int posizione, string username)
+        public Form3(int posizione)
         {
             InitializeComponent();
             filepath = "task.json";
-            tM = new taskManager();
-            uM = new userManagement();
-            user = uM.getUserData(filepath, username);
         }
 
         private void Form3_Load(object sender, EventArgs e)
@@ -66,16 +60,8 @@ namespace TaskTracker
 
         private void button3_Click(object sender, EventArgs e)
         {
-            task t = new task
-            {
-                nomeTask = textBox1.Text,
-                argomentoTask = richTextBox1.Text,
-                completion = false,
-                dataScadenza = DateTime.Parse(textBox1.Text),
-            };
-            groupBox1.Hide();
 
         }
     }
 }
-*/
+

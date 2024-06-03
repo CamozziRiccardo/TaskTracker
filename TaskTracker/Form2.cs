@@ -9,7 +9,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-/*
 namespace TaskTracker
 {
     public partial class Form2 : Form
@@ -24,7 +23,6 @@ namespace TaskTracker
             user = new userData();
         }
 
-        #region Accesso o Registrazione
         private void Form2_Load(object sender, EventArgs e)
         {
             inizialization();
@@ -62,9 +60,9 @@ namespace TaskTracker
         {
             if (ar)
             {
-                user.name = textBox1.Text;
+                user.nome = textBox1.Text;
                 user.password = textBox2.Text;
-                user.azienda.nomeAzienda = comboBox2.Text;
+                user.az.nomeAzienda = comboBox2.Text;
                 OnDatiInviati(user);
                 textBox1.Text = "";
                 textBox2.Text = "";
@@ -72,10 +70,10 @@ namespace TaskTracker
             }
             else
             {
-                user.name = textBox1.Text;
+                user.nome = textBox1.Text;
                 user.password = textBox2.Text;
-                user.azienda.nomeAzienda = comboBox3.Text;
-                user.azienda.posizione = comboBox1.Text;
+                user.az.nomeAzienda = comboBox3.Text;
+                user.az.posizione = comboBox1.Text;
                 OnDatiInviati(user);
                 textBox1.Text = "";
                 textBox2.Text = "";
@@ -88,7 +86,6 @@ namespace TaskTracker
         {
             datiInviati?.Invoke(this, new invioDati(data));
         }
-        #endregion
 
         public void chargeCombobBox(int n)
         {
@@ -110,19 +107,19 @@ namespace TaskTracker
 
             foreach (var user in users)
             {
-                if (user.Value.azienda.nomeAzienda != null)
+                if (user.Value.az.nomeAzienda != null)
                 {
-                    if (!uniqueCompanyNames.Contains(user.Value.azienda.nomeAzienda))
+                    if (!uniqueCompanyNames.Contains(user.Value.az.nomeAzienda))
                     {
-                        uniqueCompanyNames.Add(user.Value.azienda.nomeAzienda);
+                        uniqueCompanyNames.Add(user.Value.az.nomeAzienda);
                         switch (n)
                         {
                             case 1:
-                                comboBox3.Items.Add(user.Value.azienda.nomeAzienda);
+                                comboBox3.Items.Add(user.Value.az.nomeAzienda);
                                 break;
 
                             case 2:
-                                comboBox2.Items.Add(user.Value.azienda.nomeAzienda);
+                                comboBox2.Items.Add(user.Value.az.nomeAzienda);
                                 break;
                         }
                     }
@@ -131,4 +128,3 @@ namespace TaskTracker
         }
     }
 }
-*/
