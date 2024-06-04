@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public class task : userData
+public class task
 {
     private string _nomeTask;
     private string _descrizioneTask;
@@ -43,6 +43,4 @@ public class task : userData
         completamento = false;
         dataScadenza = DateTime.Parse(dS);
     }
-
-    
 }

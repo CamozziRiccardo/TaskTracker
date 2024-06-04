@@ -23,7 +23,7 @@ namespace TaskTracker
             f2 = new Form2();
         }
 
-        public void hover1(object sender, EventArgs e)
+        /*public void hover1(object sender, EventArgs e)
         {
             label2.ForeColor = Color.Blue;
         }
@@ -41,7 +41,7 @@ namespace TaskTracker
         public void deHover2(object sender, EventArgs e)
         {
             label3.ForeColor = Color.Black;
-        }
+        }*/
 
         private void label2_Click(object sender, EventArgs e)
         {
@@ -76,10 +76,10 @@ namespace TaskTracker
             else if (ar && userSample.verifyUser(userSample.nome, userSample.password, userSample.az.nomeAzienda, filePath))
             {
                 MessageBox.Show("Accesso eseguito con successo");
-                if (userSample.az.assesPosition(filePath, userSample.nome) == -1) MessageBox.Show("Posizione dell'utente non valida, si prega di rifare la registrazione e creare un nuovo utente");
+                if (userSample.assesPosition(filePath, userSample.nome) == -1) MessageBox.Show("Posizione dell'utente non valida, si prega di rifare la registrazione e creare un nuovo utente");
                 else 
                 { 
-                    Form3 f3 = new Form3(userSample.az.assesPosition(filePath, userSample.nome), userSample);
+                    Form3 f3 = new Form3(userSample.assesPosition(filePath, userSample.nome), userSample);
                     f3.Show();
                 }
             }

@@ -34,7 +34,7 @@ namespace TaskTracker
             }
             else
             {
-                activeUser.az.loadEmplyees(filepath, activeUser.nome, listView1);
+                activeUser.loadEmplyees(filepath, activeUser.nome, listView1);
             }
         }
 

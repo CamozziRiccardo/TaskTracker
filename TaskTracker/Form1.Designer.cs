@@ -54,8 +54,8 @@
             label2.TabIndex = 3;
             label2.Text = "Accedi";
             label2.Click += label2_Click;
-            label2.MouseLeave += deHover1;
-            label2.MouseHover += hover1;
+            //label2.MouseLeave += deHover1;
+            //label2.MouseHover += hover1;
             // 
             // label3
             // 
@@ -68,8 +68,8 @@
             label3.TabIndex = 4;
             label3.Text = "Registrati";
             label3.Click += label3_Click;
-            label3.MouseLeave += deHover2;
-            label3.MouseHover += hover2;
+            //label3.MouseLeave += deHover2;
+            //label3.MouseHover += hover2;
             // 
             // Form1
             // 

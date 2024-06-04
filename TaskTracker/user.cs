@@ -79,7 +79,7 @@ public class userData
         return new userData();
     }
 
-    //funzione che salav i dati degli utenti sul json
+    //funzione che salbva i dati degli utenti sul json
     protected void saveUser(string filepath, Dictionary<string, userData> users)
     {
         var json = JsonConvert.SerializeObject(users, Formatting.Indented);
@@ -89,9 +89,9 @@ public class userData
     //funzione che carica gli utenti presenti sul json in un dictionary
     protected Dictionary<string, userData> loadUsers(string filepath)
     {
-        var json = File.ReadAllText(filepath);
-        if (string.IsNullOrEmpty(json))
+        if (string.IsNullOrEmpty(File.ReadAllText(filepath)))
             return new Dictionary<string, userData>();
+        var json = File.ReadAllText(filepath);
         return JsonConvert.DeserializeObject<Dictionary<string, userData>>(json);
     }
 
@@ -144,5 +144,44 @@ public class userData
                     if (task.completamento == true)
                         user.Value.tasks.Remove(task);
         saveUser(filepath, users);
+    }
+
+    //funzione di riconoscimento della posizione di un utente all'interno dell'azienda
+    public int assesPosition(string filepath, string username)
+    {
+        //caricamento degli utenti su un dictionary
+        Dictionary<string, userData> data = loadUsers(filepath);
+        foreach (var user in data)
+            if (user.Key == username)
+                if (user.Value.az.posizione == "Dipendente")
+                    return 1;
+                else if (user.Value.az.posizione == "Capo Reparto")
+                    return 2;
+                else if (user.Value.az.posizione == "Dirigente")
+                    return 3;
+        //se l'utente non dovesse possedere una posizione o ne possedesse una non riconosciuta ritorno -1
+        return -1;
+    }
+
+    //funziona di caricamento degli utenti con posizioni meno importanti su una listview
+    public void loadEmplyees(string filepath, string username, ListView lV)
+    {
+        //caricamento degli utenti su un dictionary
+        Dictionary<string, userData> data = loadUsers(filepath);
+        foreach (var user in data)
+            if (user.Key == username)
+                if (user.Key == "Capo Reparto")
+                {
+                    foreach (var item in data)
+                        if (item.Value.az.nomeAzienda == user.Value.az.nomeAzienda && item.Value.az.posizione == "Dipendente")
+                            lV.Items.Add(item.Value.nome);
+                }
+                else if (user.Key == "Dirigente")
+                    foreach (var item in data)
+                        if (item.Value.az.nomeAzienda == user.Value.az.nomeAzienda && item.Value.az.posizione == "Dipendente")
+                            lV.Items.Add(item.Value.nome);
+                        else if (item.Value.az.nomeAzienda == user.Value.az.nomeAzienda && item.Value.az.posizione == "Capo Reparto")
+                            lV.Items.Add(item.Value.nome);
+        return;
     }
 }
